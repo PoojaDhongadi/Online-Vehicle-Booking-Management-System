@@ -1,0 +1,107 @@
+
+
+C:\Users\HP>mysql -u root -p
+Enter password: ********
+
+flush privilages;
+change password;
+
+1. login table
+create table login(
+logged_as varchar(10) NOT NULL,
+uname varchar(30) NOT NULL,
+upass varchar(30) NOT NULL
+);
+
+
+2. signup table
+create table signup(
+registered_as varchar(10) NOT NULL,
+uname varchar(30) NOT NULL,
+upass varchar(30) NOT NULL,
+fname varchar(30) NOT NULL,
+age smallint NOT NULL,
+dob date NOT NULL,
+gender varchar(8) NOT NULL,
+phoneno varchar(10) NOT NULL,
+city varchar(30) NOT NULL,
+state varchar(30) NOT NULL,
+email varchar(30) NOT NULL,
+address varchar(50) NOT NULL
+);
+
+3. vehicles table :
+create table vehicles(
+vehicleid int(10) NOT NULL auto_increment,
+drivername varchar(30) NOT NULL,
+vehiclename varchar(30) NOT NULL,
+vehicleno varchar(30) NOT NULL,
+vehicletype varchar(30) NOT NULL,
+brandname varchar(30) NOT NULL,
+fueltype varchar(30) NOT NULL,
+costoffuel smallint NOT NULL,
+insuranceno varchar(15) NOT NULL,
+dateofinsurance date NOT NULL,
+insuranceexpiry date NOT NULL,
+PRIMARY KEY (vehicleid)
+);
+
+4. bookings table :
+create table bookings(
+bookingid int(10) NOT NULL auto_increment,
+uname varchar(30) NOT NULL,
+email varchar(30) NOT NULL,
+phoneno varchar(10) NOT NULL,
+numofpassengers smallint NOT NULL,
+numofdays smallint NOT NULL,
+vehicletype varchar(30) NOT NULL,
+dateofrequirement date NOT NULL,
+dateofreturn date NOT NULL,
+destination varchar(30) NOT NULL,
+pickupplace varchar(30) NOT NULL,
+pickuptime time NOT NULL,
+reasonofbooking varchar(50) NOT NULL,
+PRIMARY KEY (bookingid)
+);
+
+5. drivers table :
+create table drivers(
+driverid int(10) NOT NULL auto_increment,
+fname varchar(30) NOT NULL,
+lname varchar(30) NOT NULL,
+city varchar(30) NOT NULL,
+state varchar(30) NOT NULL,
+address varchar(50) NOT NULL,
+phoneno varchar(10) NOT NULL,
+email varchar(30) NOT NULL,
+joiningdate date NOT NULL,
+licenseno varchar(15) NOT NULL,
+license_end_date date NOT NULL,
+yearofexperience smallint NOT NULL,
+PRIMARY KEY (driverid)
+);
+
+6. In admin home page
+	1 - on click of booking status details it should redirect to webpage containing bookings table
+	    select * from bookings;
+	2 - on click of confirm button of change password page it should update the login info. of that person
+	    update login set upass = ? where uname = ?;
+
+7. In user home page
+	1 - on click of booking history it should redirect to webpage containing booking info. of that
+	    particular person.
+	    select * from bookings where uname = ?;
+	2 - on click of View Drivers it should redirect to webpage containing drivers table
+	    select * from drivers;
+	3 - on click of View Vehicle Details it should redirect to webpage containing vehicles table
+	    select * from vehicles;
+	4 - on click of confirm button of change password page it should update the login info. of that person
+	    update login set upass = ? where uname = ?;
+
+
+
+
+
+
+
+
