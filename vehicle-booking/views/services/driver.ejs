@@ -34,7 +34,7 @@
 </head>
 <body>
     <h1>New Driver Form</h1>
-    <form action="" onsubmit="return validate()">
+    <form action="" method="POST" onsubmit="return validate()">
         <label>First Name :</label>
         <input type="text" name="fname" class="textbox" placeholder="Enter First name" required><br><br>
 
@@ -45,7 +45,7 @@
         <input type="text" name="city" class="textbox" placeholder="Enter city name" required><br><br>
 
         <label>State :</label>
-        <select name="states" class="textbox">
+        <select name="state" class="textbox">
             <option value="karnataka">Karnataka</option>
             <option value="Maharastra">Maharastra</option>
             <option value="up">UP</option>
@@ -56,19 +56,19 @@
         <textarea name="Address" rows="3" cols="20" class="textbox" placeholder="Enter your Address..." required></textarea><br><br>
 
         <label>Mobile Number :</label>
-        <input type="tel" name="no" id="num" maxlength="10" class="textbox" placeholder="Enter Mobile No." required><br><br>
+        <input type="tel" name="phoneno" id="num" maxlength="10" class="textbox" placeholder="Enter Mobile No." required><br><br>
 
         <label>Email :</label>
         <input type="email" name="mail" id="mail" placeholder="abc@gmail.com" class="textbox"><br><br>
 
         <label>Driver joining date :</label>
-        <input type="date" name="djd" class="textbox" placeholder="Enter joining date" required><br><br>
+        <input type="date" name="joiningdate" class="textbox" placeholder="Enter joining date" required><br><br>
 
         <label>License-No :</label>
-        <input type="tel" name="lno" class="textbox" placeholder="Enter License-No" required><br><br>
+        <input type="tel" name="licenseno" class="textbox" placeholder="Enter License-No" required><br><br>
 
         <label>License end date :</label>
-        <input type="date" name="led" class="textbox" required><br><br>
+        <input type="date" name="licenseEndDate" class="textbox" required><br><br>
 
         <label>Year of experience :</label>
         <input type="number" name="yoe" class="textbox" placeholder="Enter year of experience" required><br><br>

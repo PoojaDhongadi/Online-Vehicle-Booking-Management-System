@@ -5,8 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booking Status</title>
+    <style>
+        table, td, th {  
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 50%;
+     
+    }
+    .table-data{
+        position: relative;
+      left:150px;
+      top:100px;
+    }
+    th, td {
+      padding: 10px;
+    }
+    </style>
 </head>
 <body>
     <h1>Booking Status Details</h1>
+    <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>SL.NO</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>No. of passengers</th>
+                    <th>No. of days</th>
+                    <th>Vehicle type</th>
+                    <th>Date of requirement</th>
+                    <th>Date of return</th>
+                    <th>Destination</th>
+                    <th>Pickup place</th>
+                    <th>Pickup time</th>
+                    <th>Reason</th>
+                </tr>
+                
+                <% if(data.length){
+                  for(var i=0; i<data.length; i++){ %>
+                    <tr>
+                      <td><%=(i+1)%></td>
+                      <td><%=data[i].uname %></td>
+                      <td><%=data[i].email %></td>
+                      <td><%=data[i].phoneno %></td>
+                      <td><%=data[i].numofpassengers %></td>
+                      <td><%=data[i].numofdays %></td>
+                      <td><%=data[i].vehicletype %></td>
+                      <td><%=data[i].dateofrequirement %></td>
+                      <td><%=data[i].dateofreturn %></td>
+                      <td><%=data[i].destination %></td>
+                      <td><%=data[i].pickupplace %></td>
+                      <td><%=data[i].pickuptime %></td>
+                      <td><%=data[i].reasonofbooking %></td>
+                      
+                  </tr>
+                  <%}
+              }  else { %>
+                  <tr>
+                    <td colspan="3">No user</td>
+                  </tr>
+                <% } %>
+                
+                
+                
+            </table>
+            </div>
 </body>
 </html>

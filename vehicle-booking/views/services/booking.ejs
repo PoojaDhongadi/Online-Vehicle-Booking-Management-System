@@ -39,12 +39,12 @@
 
 <body>
     <h1>BOOKING</h1>
-    <form action="" onsubmit="return validate()">
+    <form action="" method="POST" onsubmit="return validate()">
         <label>Name :</label>
         <input type="text" name="uname" class="textbox" placeholder="Enter your name" required><br><br>
 
         <label>Email :</label>
-        <input type="email" id="mail" name="no" class="textbox" placeholder="abc@gmail.com"><br><br>
+        <input type="email" id="mail" name="mail" class="textbox" placeholder="abc@gmail.com"><br><br>
 
         <label>Mobile Number :</label>
         <input type="digit" name="no" id="num" class="textbox" maxlength="10" placeholder="Enter phone no." required><br><br>
@@ -67,16 +67,16 @@
         <input type="date" name="dorr" class="textbox" required><br><br>
 
         <label>Destination :</label>
-        <input type="text" name="Destination" class="textbox" placeholder="Enter the Destination" required><br><br>
+        <input type="text" name="destination" class="textbox" placeholder="Enter the Destination" required><br><br>
 
         <label>Pickup Point :</label>
-        <input type="text" name="Pickup" class="textbox" placeholder="Enter Pickup place" required><br><br>
+        <input type="text" name="pickup" class="textbox" placeholder="Enter Pickup place" required><br><br>
 
         <label>Pickup Time :</label>
-        <input type="time" name="Pickuptime" class="textbox" required><br><br>
+        <input type="time" name="pickuptime" class="textbox" required><br><br>
 
         <label>Reason for booking :</label>
-        <textarea name="Address" rows="3" cols="20" class="textbox" placeholder="Enter Reason..."></textarea><br><br>
+        <textarea name="reason" rows="3" cols="20" class="textbox" placeholder="Enter Reason..."></textarea><br><br>
 
         <input type="reset" value="Reset" class="sub">
         <input type="submit" value="Confirm" class="sub">

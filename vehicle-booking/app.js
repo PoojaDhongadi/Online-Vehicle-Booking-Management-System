@@ -1,6 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
+//var session = require('express-session');
 var path = require('path');
+//var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -10,12 +12,12 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // get the database variable here
-var db = require('./database/connection');
+// var db = require('./database/connection');
 
-db.query('Select * from user', function(error,result) {
-  if(error) console.log(error);
-  console.log('query returned data', result);
-})
+// db.query('Select * from user', function(error,result) {
+//   if(error) console.log(error);
+//   console.log('query returned data', result);
+// })
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.get('/bookingStatus', bookingStatus.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
