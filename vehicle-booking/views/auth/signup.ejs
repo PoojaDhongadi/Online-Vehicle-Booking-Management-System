@@ -89,8 +89,8 @@
         var password = document.getElementById('pass');
         var text = document.getElementById('mail').value;
         var number = document.getElementById('num').value;
-        var sel = document.getElementById('selectBox');
-        var option = sel.options[sel.selectedIndex].value;
+      //  var sel = document.getElementById('selectBox');
+       // var option = sel.options[sel.selectedIndex].value;
         
         var regx= /^([a-z 0-9\.-]+)@([a-z0-9-]+).([a-z]{2,8})(.[a-z]{2,8})?$/;  //email
         var regx2 = /^[7-9]\d{9}$/; //phone number
@@ -110,7 +110,7 @@
             return false;
         }
         
-        window.open(option);
+        //window.open(option);
 
         return true;
      }

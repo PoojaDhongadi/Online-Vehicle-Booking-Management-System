@@ -46,26 +46,28 @@
                     <th>Reason</th>
                 </tr>
                 
-                <% if(data.length){
-                  for(var i=0; i<data.length; i++){ %>
+                <% if(userdata.length != 0){
+                  var i=0;
+                  userdata.forEach(function (data){
+                %>
                     <tr>
-                      <td><%=(i+1)%></td>
-                      <td><%=data[i].uname %></td>
-                      <td><%=data[i].email %></td>
-                      <td><%=data[i].phoneno %></td>
-                      <td><%=data[i].numofpassengers %></td>
-                      <td><%=data[i].numofdays %></td>
-                      <td><%=data[i].vehicletype %></td>
-                      <td><%=data[i].dateofrequirement %></td>
-                      <td><%=data[i].dateofreturn %></td>
-                      <td><%=data[i].destination %></td>
-                      <td><%=data[i].pickupplace %></td>
-                      <td><%=data[i].pickuptime %></td>
-                      <td><%=data[i].reasonofbooking %></td>
+                      <td><%=data.bookingid %></td>
+                      <td><%=data.uname %></td>
+                      <td><%=data.email %></td>
+                      <td><%=data.phoneno %></td>
+                      <td><%=data.numofpassengers %></td>
+                      <td><%=data.numofdays %></td>
+                      <td><%=data.vehicletype %></td>
+                      <td><%=data.dateofrequirement %></td>
+                      <td><%=data.dateofreturn %></td>
+                      <td><%=data.destination %></td>
+                      <td><%=data.pickupplace %></td>
+                      <td><%=data.pickuptime %></td>
+                      <td><%=data.reasonofbooking %></td>
                       
                   </tr>
-                  <%}
-              }  else { %>
+                  <% i++; }) %>
+              <%  } else { %>
                   <tr>
                     <td colspan="3">No user</td>
                   </tr>

@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get('/bookingStatus', bookingStatus.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

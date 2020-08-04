@@ -2,10 +2,13 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
 //var localStorage = require('local-storage');
 
 var db = require("../database/connection");
 var userModel = require("../database/userModel");
+var validationRules = require('../validation_rules/rules');
+var asyncValidator = require('async-validator-2');
 
 var app = express();
 app.use(session({
@@ -21,25 +24,29 @@ router.get('/', function(req, res, next) {
   res.render('auth/login');
 });
 
-router.post('/', function(req, res, next) {
-  const payload = {
-    login: req.body.login,
-    uname: req.body.uname,
-    pass: req.body.pass,
-  };
-
-  //console.log("payload", payload);
-
-  var sql = `Select registered_as,uname,upass from signup where registered_as='${payload.login}' and uname = '${payload.uname}' and upass = '${payload.pass}'`;
-
-  db.query(sql, function (err, result) {
-    if (err) throw err;
-    if (result.length > 0) {
-      res.redirect("/admin");
-    } else {
-      res.redirect("/login");
-    }
-  });
+router.post('/auth', function(req, res, next) {
+  var login = req.body.login;
+  var username = req.body.uname;
+	var password = req.body.pass;
+	if (username && password) {
+		db.query('SELECT * FROM signup WHERE registered_as = ? AND uname = ? AND upass = ?', [login,username, password], function(error, results, fields) {
+			if (results.length > 0) {
+        console.log('successful');
+				//req.session.loggedin = true;
+        //req.session.uname = username;
+        // if(req.body.login == "/admin")
+        //   res.render('/admin');
+        //else// if(req.body.login == '/home/index')
+          //res.redirect('/home/index');
+			} else {
+				res.send('Incorrect Username and/or Password!');
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
 });
 
 router.get('/signup', function(req, res, next) {
@@ -87,7 +94,9 @@ router.get('/signup', function(req, res, next) {
   ];
   db.query(sql, [values], function (err, res) {
     if (err) throw err;
-    res.redirect("/login");
+    else
+      res.send("sucessfully added");
+      res.end();
   });
 });
 
@@ -119,19 +128,19 @@ router.post("/auth/change-password", function (req, res, next) {
   };
  
     if(req.body.npass == req.body.renpass){
-      
-      userModel.updatePassword(req.body.npass, req.body.uname, (result)=> {
-          if(!result){
-              res.send('invalid');
-          }
-          else {
-            res.send('sucessful');
-          }
+      db.query('UPDATE signup SET upass = ? WHERE uname = ?', [data.newPassword, data.user], function(error, results, fields) {
+        if (results.length > 0) {
+          res.send('successfully updated');
+        } else {
+          res.send('Incorrect Username and/or Password!');
+        }			
+        res.end();
       });
   
     }else{
       console.log('not match');
       res.send("Your new passwords don't match");
+      res.end();
     }
 });
 
@@ -155,8 +164,9 @@ router.post('/driver', function(req, res, next) {
     licenseEndDate: req.body.licenseEndDate,
     yoe: req.body.yoe,
   };
+  var yoe = parseInt(info2.yoe);
   //console.log(info);
-   var sql2 =
+  /* var sql2 =
     "INSERT INTO drivers (fname,lname,city,state,address,phoneno,email,joiningdate,licenseno,license_end_date,yearofexperience) VALUES ?";
   var values = [
     [
@@ -176,6 +186,20 @@ router.post('/driver', function(req, res, next) {
   db.query(sql2, [values], function (err, result) {
     if (err) throw err;
     res.redirect("/driver");
+  });*/
+  db.query('INSERT INTO drivers (fname,lname,city,state,address,phoneno,email,joiningdate,licenseno,license_end_date,yearofexperience) VALUES ?', [info2.fname,info2.lname,info2.city,info2.state,info2.Address,info2.phoneno,info2.mail,info2.joiningdate,info2.licenseno,info2.licenseEndDate,yoe], function(error, results, fields) {
+    if (results.length > 0) {
+      console.log('successful');
+      //req.session.loggedin = true;
+      //req.session.uname = username;
+      // if(req.body.login == "/admin")
+      //   res.render('/admin');
+      //else// if(req.body.login == '/home/index')
+        //res.redirect('/home/index');
+    } else {
+      res.send('failed to insert');
+    }			
+    res.end();
   });
 
 }); 
@@ -275,7 +299,7 @@ router.get('/bookingStatus', function(req, res, next) {
   db.query('SELECT * FROM booking`',function(err,data,fields){
     if(err)
       console.log("Error : %s ",err);
-    res.render('services/bookingStatus',{page_title:"Booking Status",userData:data}); 
+    res.render('/bookingStatus',{title:"list",userdata:data}); 
   }); 
 });
 
