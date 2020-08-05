@@ -165,37 +165,11 @@ router.post('/driver', function(req, res, next) {
     yoe: req.body.yoe,
   };
   var yoe = parseInt(info2.yoe);
-  //console.log(info);
-  /* var sql2 =
-    "INSERT INTO drivers (fname,lname,city,state,address,phoneno,email,joiningdate,licenseno,license_end_date,yearofexperience) VALUES ?";
-  var values = [
-    [
-      info2.fname,
-      info2.lname,
-      info2.city,
-      info2.state,
-      info2.Address,
-      info2.phoneno,
-      info2.mail,
-      info2.joiningdate,
-      info2.licenseno,
-      info2.licenseEndDate,
-      parseInt(info2.yoe),
-    ],
-  ];
-  db.query(sql2, [values], function (err, result) {
-    if (err) throw err;
-    res.redirect("/driver");
-  });*/
+
   db.query('INSERT INTO drivers (fname,lname,city,state,address,phoneno,email,joiningdate,licenseno,license_end_date,yearofexperience) VALUES ?', [info2.fname,info2.lname,info2.city,info2.state,info2.Address,info2.phoneno,info2.mail,info2.joiningdate,info2.licenseno,info2.licenseEndDate,yoe], function(error, results, fields) {
     if (results.length > 0) {
       console.log('successful');
-      //req.session.loggedin = true;
-      //req.session.uname = username;
-      // if(req.body.login == "/admin")
-      //   res.render('/admin');
-      //else// if(req.body.login == '/home/index')
-        //res.redirect('/home/index');
+      
     } else {
       res.send('failed to insert');
     }			
@@ -295,13 +269,13 @@ router.get('/user/booking', function(req, res, next) {
 });
 
 
-router.get('/bookingStatus', function(req, res, next) {
-  db.query('SELECT * FROM booking`',function(err,data,fields){
-    if(err)
-      console.log("Error : %s ",err);
-    res.render('/bookingStatus',{title:"list",userdata:data}); 
-  }); 
-});
+// router.get('/bookingStatus', function(req, res, next) {
+//   db.query('SELECT * FROM booking`',function(err,data,fields){
+//     if(err)
+//       console.log("Error : %s ",err);
+//     res.render('/bookingStatus',{title:"list",userdata:data}); 
+//   }); 
+// });
 
 router.get('/bookingHistory', function(req, res, next) {
   res.render('services/bookingHistory');  
