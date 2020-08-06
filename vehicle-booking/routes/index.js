@@ -24,6 +24,11 @@ router.get('/', function(req, res, next) {
   res.render('auth/login');
 });
 
+
+router.get('/auth/not-found', function(req, res, next) {
+  res.render('auth/not-found');
+});
+
 router.post('/auth', function(req, res, next) {
   var login = req.body.login;
   var username = req.body.uname;
@@ -150,6 +155,9 @@ router.get('/driver', function(req, res, next) {
 });
 
 
+
+
+
 router.post('/driver', function(req, res, next) {
   const info2 = {
     fname: req.body.fname,
@@ -269,13 +277,14 @@ router.get('/user/booking', function(req, res, next) {
 });
 
 
-// router.get('/bookingStatus', function(req, res, next) {
-//   db.query('SELECT * FROM booking`',function(err,data,fields){
-//     if(err)
-//       console.log("Error : %s ",err);
-//     res.render('/bookingStatus',{title:"list",userdata:data}); 
-//   }); 
-// });
+router.get('/bookingStatus', function(req, res, next) {
+  db.query('SELECT * FROM bookings',function(err,data,fields){
+    if(err)
+      console.log("Error : %s ",err);
+      console.log("data getting inside the bookings", data);
+    res.render('services/bookingStatus',{title:"list",userdata:data}); 
+  }); 
+});
 
 router.get('/bookingHistory', function(req, res, next) {
   res.render('services/bookingHistory');  
