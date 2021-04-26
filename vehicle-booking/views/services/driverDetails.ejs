@@ -5,8 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Driver Details</title>
+    <style>
+            table, td, th {  
+              border: 2px solid #ddd;
+              text-align: left;
+            }
+            
+            table {
+              border-collapse: collapse;
+              width: 80%;
+             
+            }
+            .table-data{
+                position: relative;
+              left:150px;
+              top:100px;
+            }
+            th, td {
+              padding: 10px;
+            }
+    </style>
 </head>
 <body>
-    <h1>Details Details</h1>
+    <center>
+            <h1>Driver Details</h1>
+    </center>
+
+    <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>Driver id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Address</th>
+                    <th>Phone NO</th>
+                    <th>Email</th>
+                    <th>Joining Date</th>
+                    <th>License No</th>
+                    <th>License End Date</th>
+                    <th>Year of Experience</th>
+                </tr>
+                
+                <% if(userdata.length != 0){
+                  var i=0;
+                  userdata.forEach(function (data){
+                %>
+                    <tr>
+                      <td><%=data.driverid %></td>
+                      <td><%=data.fname %></td>
+                      <td><%=data.lname %></td>
+                      <td><%=data.city %></td>
+                      <td><%=data.state %></td>
+                      <td><%=data.address %></td>
+                      <td><%=data.phoneno %></td>
+                      <td><%=data.email %></td>
+                      <td><%=data.joiningdate %></td>
+                      <td><%=data.licenseno %></td>
+                      <td><%=data.license_end_date %></td>
+                      <td><%=data.yearofexperience %></td>
+                  </tr>
+                  <% i++; }) %>
+              <%  } else { %>
+                  <tr>
+                    <td colspan="3">No user</td>
+                  </tr>
+                <% } %>
+    
 </body>
 </html>

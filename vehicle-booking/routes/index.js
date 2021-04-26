@@ -2,13 +2,8 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var ejs = require('ejs');
-//var localStorage = require('local-storage');
 
 var db = require("../database/connection");
-var userModel = require("../database/userModel");
-var validationRules = require('../validation_rules/rules');
-var asyncValidator = require('async-validator-2');
 
 var app = express();
 app.use(session({
@@ -154,10 +149,6 @@ router.get('/driver', function(req, res, next) {
   res.render('services/driver');
 });
 
-
-
-
-
 router.post('/driver', function(req, res, next) {
   const info2 = {
     fname: req.body.fname,
@@ -175,7 +166,7 @@ router.post('/driver', function(req, res, next) {
   var yoe = parseInt(info2.yoe);
 
   db.query('INSERT INTO drivers (fname,lname,city,state,address,phoneno,email,joiningdate,licenseno,license_end_date,yearofexperience) VALUES ?', [info2.fname,info2.lname,info2.city,info2.state,info2.Address,info2.phoneno,info2.mail,info2.joiningdate,info2.licenseno,info2.licenseEndDate,yoe], function(error, results, fields) {
-    if (results.length > 0) {
+    if (results) {
       console.log('successful');
       
     } else {
@@ -286,16 +277,36 @@ router.get('/bookingStatus', function(req, res, next) {
   }); 
 });
 
-router.get('/bookingHistory', function(req, res, next) {
-  res.render('services/bookingHistory');  
+router.get('/bookingHistory', function(req, res, next) {//errpr
+  
+  db.query('SELECT * FROM bookings where uname = ?',[data.uname],function(err,data,fields){
+    if(err)
+      console.log("Error : %s ",err);
+      console.log("data getting inside the drivers", data);
+    res.render('services/bookingHistory',{title:"list",userdata:data}); 
+  });  
+  
+  //res.render('services/bookingHistory');  
 });
 
 router.get('/services/driverDetails', function(req, res, next) {
-  res.render('services/driverDetails');   
+
+  db.query('SELECT * FROM drivers',function(err,data,fields){
+    if(err)
+      console.log("Error : %s ",err);
+      console.log("data getting inside the drivers", data);
+    res.render('services/driverDetails',{title:"list",userdata:data}); 
+  });  
 });
 
 router.get('/vehicleDetails', function(req, res, next) {
-  res.render('services/vehicleDetails');   
+  
+  db.query('SELECT * FROM vehicles',function(err,data,fields){
+    if(err)
+      console.log("Error : %s ",err);
+      console.log("data getting inside the vehicles", data);
+    res.render('services/vehicleDetails',{title:"list",userdata:data}); 
+  }); 
 });
 
 module.exports = router;

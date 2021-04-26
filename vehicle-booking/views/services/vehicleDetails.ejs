@@ -5,8 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vehicle Details</title>
+    <style>
+    table, td, th {  
+      border: 2px solid #ddd;
+      text-align: left;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 80%;
+     
+    }
+    .table-data{
+        position: relative;
+      left:150px;
+      top:100px;
+    }
+    th, td {
+      padding: 10px;
+    }
+    </style>
 </head>
 <body>
-    <h1>Vehicle Details</h1>
+    <center>
+            <h1>Vehicle Details</h1>
+    </center>
+   
+    <div class="table-data">
+        <table border="1">
+            <tr>
+                <th>Vehicle id</th>
+                <th>Driver Name</th>
+                <th>Vehicle Name</th>
+                <th>Vehicle No</th>
+                <th>Vehicle Type</th>
+                <th>Brand Name</th>
+                <th>Fuel Type</th>
+                <th>Cost of fuel</th>
+                <th>Insurance No</th>
+                <th>Date of Insurance</th>
+                <th>Insurance Expiry</th>
+            </tr>
+            
+            <% if(userdata.length != 0){
+              var i=0;
+              userdata.forEach(function (data){
+            %>
+                <tr>
+                  <td><%=data.vehicleid %></td>
+                  <td><%=data.drivername %></td>
+                  <td><%=data.vehiclename %></td>
+                  <td><%=data.vehicleno %></td>
+                  <td><%=data.vehicletype %></td>
+                  <td><%=data.brandname %></td>
+                  <td><%=data.fueltype %></td>
+                  <td><%=data.costoffuel %></td>
+                  <td><%=data.insuranceno %></td>
+                  <td><%=data.dateofinsurance %></td>
+                  <td><%=data.insuranceexpiry %></td>
+              </tr>
+              <% i++; }) %>
+          <%  } else { %>
+              <tr>
+                <td colspan="3">No user</td>
+              </tr>
+            <% } %>
+            
+            
 </body>
 </html>

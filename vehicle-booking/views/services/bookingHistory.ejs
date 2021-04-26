@@ -5,8 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booking History</title>
+    <style>
+            table, td, th {  
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+        
+        table {
+          border-collapse: collapse;
+          width: 50%;
+         
+        }
+        .table-data{
+            position: relative;
+          left:150px;
+          top:100px;
+        }
+        th, td {
+          padding: 10px;
+        }
+        </style>
 </head>
 <body>
-    <h1>Booking History</h1>
+    <center>
+            <h1>Booking History</h1>
+    </center>
+    
+    <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>No. of passengers</th>
+                    <th>No. of days</th>
+                    <th>Vehicle type</th>
+                    <th>Date of requirement</th>
+                    <th>Date of return</th>
+                    <th>Destination</th>
+                    <th>Pickup place</th>
+                    <th>Pickup time</th>
+                    <th>Reason</th>
+                </tr>
+                
+                <% if(userdata.length != 0){
+                  var i=0;
+                  userdata.forEach(function (data){
+                %>
+                    <tr>
+                      <td><%=data.bookingid %></td>
+                      <td><%=data.uname %></td>
+                      <td><%=data.email %></td>
+                      <td><%=data.phoneno %></td>
+                      <td><%=data.numofpassengers %></td>
+                      <td><%=data.numofdays %></td>
+                      <td><%=data.vehicletype %></td>
+                      <td><%=data.dateofrequirement %></td>
+                      <td><%=data.dateofreturn %></td>
+                      <td><%=data.destination %></td>
+                      <td><%=data.pickupplace %></td>
+                      <td><%=data.pickuptime %></td>
+                      <td><%=data.reasonofbooking %></td>
+                      
+                  </tr>
+                  <% i++; }) %>
+              <%  } else { %>
+                  <tr>
+                    <td colspan="3">No user</td>
+                  </tr>
+                <% } %>
 </body>
 </html>
